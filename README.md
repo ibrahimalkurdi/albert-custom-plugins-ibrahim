@@ -9,7 +9,7 @@ The TODO file is managed by TODO visual studio code plugin, it works for me on U
 
 2- Visual Studio Code installation
 
-3- Install TODO list plugin https://github.com/fabiospampinato/vscode-todo-plus
+3- Install todo-plus plugin in Visual Studio Code https://github.com/fabiospampinato/vscode-todo-plus
 
 4- Create new file called **automated-tasks.todo** in a specific location on your machine.
 
