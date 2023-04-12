@@ -24,6 +24,9 @@ my-albert-tasks:
 
 ## Installation:
 
-1- Copy the plugin directory to this path on your machine `/usr/share/albert/python/plugins/todo/__init__.py`
+1- Copy the todo directory to this path on your machine `/usr/share/albert/python/plugins/`
+```
+cp -r plugins/todo /usr/share/albert/python/plugins/
+```
 
 2- Restart Albert
