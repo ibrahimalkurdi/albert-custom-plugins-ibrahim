@@ -10,4 +10,4 @@ The TODO file is managed by TODO visual studio code plugin, it works for me on U
 3- Create new file called **automated-tasks.todo** in a specific location on your machine.
 4- Update the automated_todo_list.sh script with the automated-tasks.todo file path.
 5- Copy the automated_todo_list.sh to specific location on your machine.
-6- Update the __init__.py file in the plugins directory with the automated_todo_list.sh file path.
+6- Update the `__init__.py` file in the plugins directory with the automated_todo_list.sh file path.
