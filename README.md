@@ -11,7 +11,10 @@ The TODO file is managed by TODO visual studio code plugin, it works for me on U
 
 3- Install todo-plus plugin in Visual Studio Code https://github.com/fabiospampinato/vscode-todo-plus
 
-4- Create new file called **automated-tasks.todo** in a specific location on your machine.
+4- Create a new file called **automated-tasks.todo** in a specific location on your machine and add this line in the top of it:
+```
+my-albert-tasks:
+```
 
 5- Update the `automated_todo_list.sh` script with the `automated-tasks.todo` file path.
 
