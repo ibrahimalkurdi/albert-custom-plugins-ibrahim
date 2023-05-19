@@ -22,6 +22,17 @@ my-albert-tasks:
 
 7- Update the `__init__.py` file in the plugins directory with the automated_todo_list.sh file path.
 
+8- Append the name of the new plugin in the albert config file:
+```
+vim /home/<user>/.config/albert.conf
+```
+then:
+```
+[todo]
+enabled=true
+trigger_enabled=true
+```
+
 ## Installation:
 
 1- Copy the todo directory to this path on your machine `/usr/share/albert/python/plugins/`
