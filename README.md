@@ -18,7 +18,7 @@ my-albert-tasks:
 
 5- Update the `automated_todo_list.sh` script with the `automated-tasks.todo` file path.
 
-6- Copy the `automated_todo_list.sh` to specific location on your machine.
+6- Copy the `scripts/automated_todo_list.sh` to specific location on your machine.
 
 7- Update the `__init__.py` file in the plugins directory with the automated_todo_list.sh file path.
 
@@ -41,3 +41,15 @@ cp -r plugins/todo /usr/share/albert/python/plugins/
 ```
 
 2- Restart Albert
+
+# Add Custom Keyboard shortcut:
+
+Install this package:
+```
+sudo apt install xdotool
+```
+Then:
+Add this command as a custom Keyboard shortcut
+```
+bash -c 'albert show "mylist " && sleep 0.1s && xdotool key Return'
+```
