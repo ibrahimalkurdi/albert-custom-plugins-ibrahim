@@ -2,7 +2,7 @@
 
 
 # Get a list of directories
-cd /home/ibrahim/git-projects
+cd /home/<user>/git-projects # Git Repo directory path
 directories=$(ls -d ./*)
 
 # Create an array of menu options
