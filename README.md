@@ -44,7 +44,4 @@ Install this package:
 sudo apt install xdotool
 ```
 Then:
-Add this command as a custom Keyboard shortcut
-```
-bash -c 'albert show "mylist " && sleep 0.1s && xdotool key Return'
-```
+Add Keyboard shortcuts as defined in this file: **keyboard-shortcut.md**
