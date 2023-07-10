@@ -3,7 +3,7 @@ Define here the needed Keyboard shortcuts:
 1- Show my Todo List in a pop up window:
 ```
 Name: Show up my Todo list
-Command: bash -c 'albert show "mylist " && sleep 0.08s && xdotool key Return'
+Command: bash /home/ibrahim/scripts/show-up-my-todo-list.sh'
 Alt + A
 ```
 
