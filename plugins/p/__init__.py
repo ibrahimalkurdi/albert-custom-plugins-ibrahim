@@ -38,7 +38,6 @@ class Plugin(QueryHandler):
             "vs": "vsrepo ",
             "my": "mylist ",
             "to": "todo ",
-            "au": "autolist ",
             # Add more mappings as needed
         }
         partial_command = query.string.lower()
