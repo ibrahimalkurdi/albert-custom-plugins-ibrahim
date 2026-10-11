@@ -2,47 +2,44 @@
 This extension provides a quick run for my todo script and passing the TODO new item from Albert application launcher.
 """
 
-from albert import *
-import subprocess
-import sys
+from pathlib import Path
 
-md_iid = "0.5"
-md_version = "0.2"
-#md_id = "overwrite"
+from albert import *
+
+md_iid = "5.0"
+md_version = "1.0"
 md_name = "TODO List"
 md_description = "Automated task addition to my TODO list file"
 md_license = "BSD-2"
 md_url = "https://github.com/ibrahimalkurdi/albert-todo-plugin"
-md_maintainers = "@ibrahimalkurdi"
+md_authors = ["@ibrahimalkurdi"]
+md_maintainers = ["@ibrahimalkurdi"]
+
+SCRIPT = str(Path.home() / "scripts" / "automated_todo_list.sh")
 
 
-class Plugin(QueryHandler):
-    def id(self):
-        return md_id
+class Plugin(PluginInstance, GeneratorQueryHandler):
 
-    def name(self):
-        return md_name
+    def __init__(self):
+        PluginInstance.__init__(self)
+        GeneratorQueryHandler.__init__(self)
 
-    def description(self):
-        return md_description
+    def defaultTrigger(self):
+        return "todo "
 
-    def initialize(self):
-        info('initialize')
+    def synopsis(self, query):
+        return "<Add your Todo list item>"
 
-    def finalize(self):
-        info('finalize')
-
-    def synopsis(self):
-        return '[[Add your Todo list item]]'
-
-    def handleQuery(self, query):
-        if not query.isValid:
+    def items(self, ctx):
+        task = ctx.query.strip()
+        if not task:
             return
-        if query.string.strip():
-            args = query.string.strip()
-        query.add(Item(
-            id="Id",
-            text="Task Management",
-            subtext="Each entry will add single task to the automated TODO list",
-            actions=[Action('Run script', 'Run Script', lambda: subprocess.Popen(['bash', '/home/ibrahim/scripts/automated_todo_list.sh', args  ]) )]
-        ))
+        yield [
+            StandardItem(
+                id=self.id(),
+                text=f"Add task: {task}",
+                subtext="Each entry will add single task to the automated TODO list",
+                icon_factory=lambda: Icon.grapheme("✅"),
+                actions=[Action("run", "Add task", lambda t=task: runDetachedProcess(["bash", SCRIPT, t]))],
+            )
+        ]

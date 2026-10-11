@@ -1,47 +1,41 @@
 # albert-custom-plugins-ibrahim
 
-This is an Albert plugin, which will add new TODO item to a todo list in a specific file by execute shell script.
-The TODO file is managed by TODO visual studio code plugin, it works for me on Ubuntu 22.04 LTS.
+My custom [Albert](https://albertlauncher.github.io) plugins (Albert 35+, Python interface `md_iid 5.0`), tested on Ubuntu 26.04.
 
-## Prerequisites:
+| Shortcut | Plugin | Does |
+|---|---|---|
+| `help ` | myshortcuts | Lists these shortcuts; Enter opens the chosen one |
+| `mylist ` | mylist | Shows `my-schedule-tasks.todo` in a popup |
+| `todo <task>` | todo | Adds a task to `my-schedule-tasks.todo` |
+| `vsrepo ` | vsrepo | Picks a Git repo and opens it in VS Code |
+| `prayer` | prayer | Opens https://alsakina.pages.dev |
 
-1- Albert installation
+## Install
 
-2- Visual Studio Code installation
+1. Install Albert, `zenity`, VS Code and its [todo-plus](https://github.com/fabiospampinato/vscode-todo-plus) extension.
+2. Copy the scripts and set your paths in them (`<user>` placeholders):
+   ```
+   mkdir -p ~/scripts && cp scripts/*.sh ~/scripts/
+   ```
+3. Create `my-schedule-tasks.todo` at the path used in `automated_todo_list.sh`, starting with the line `my-albert-tasks:`.
+4. Copy the plugins to the user plugin dir (not `/usr/share/albert`, the package owns it):
+   ```
+   mkdir -p ~/.local/share/albert/python/plugins && cp -r plugins/* ~/.local/share/albert/python/plugins/
+   ```
+5. In Albert Settings > Plugins enable **Python plugins**, then each plugin above, or add to `~/.config/albert/config` while Albert is closed:
+   ```
+   [python]
+   enabled=true
 
-3- Install todo-plus plugin in Visual Studio Code https://github.com/fabiospampinato/vscode-todo-plus
+   [python.mylist]
+   enabled=true
+   ```
+   (same for `python.myshortcuts`, `python.prayer`, `python.todo`, `python.vsrepo`)
 
-4- Create a new file called **my-schedule-tasks.todo** in a specific location on your machine and add this line in the top of it:
+Optional: hide the extra "Configuration: Enabled, State: Loaded" rows with
 ```
-my-albert-tasks:
+[pluginregistry]
+global_handler_enabled=false
 ```
 
-5- Update the `automated_todo_list.sh` script with the `my-schedule-tasks.todo` file path.
-
-6- Copy the `scripts/automated_todo_list.sh` to specific location on your machine.
-
-7- Update the `__init__.py` file in the plugins directory with the automated_todo_list.sh file path.
-
-8- Enable albert custom plugins in albert config:
-```
-cp albert.conf /home/<user>/.config/albert.conf
-```
-
-
-## Installation:
-
-1- Copy the todo directory to this path on your machine `/usr/share/albert/python/plugins/`
-```
-cp -r plugins/todo /usr/share/albert/python/plugins/
-```
-
-2- Restart Albert
-
-# Add Custom Keyboard shortcut:
-
-Install this package:
-```
-sudo apt install xdotool
-```
-Then:
-Add Keyboard shortcuts as defined in this file: **keyboard-shortcut.md**
+Keyboard shortcuts: see [keyboard-shortcut.md](keyboard-shortcut.md) (needs `sudo apt install xdotool`).

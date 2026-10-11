@@ -2,41 +2,42 @@
 This extension help to open a single Git repo in a new Visual Studio Code window.
 """
 
-from albert import *
-import subprocess
-import sys
+from pathlib import Path
 
-md_iid = "0.5"
-md_version = "0.2"
-#md_id = "vs"
+from albert import *
+
+md_iid = "5.0"
+md_version = "1.0"
 md_name = "Visual Studio Code Git Repo"
 md_description = "Pick up a Repo and open it in Visual Studio"
 md_license = "BSD-2"
 md_url = "https://github.com/ibrahimalkurdi/albert-todo-plugin"
-md_maintainers = "@ibrahimalkurdi"
+md_authors = ["@ibrahimalkurdi"]
+md_maintainers = ["@ibrahimalkurdi"]
+
+SCRIPT = str(Path.home() / "scripts" / "vs-code-pick-up-repo.sh")
 
 
-class Plugin(QueryHandler):
-    def id(self):
-        return md_id
+class Plugin(PluginInstance, GeneratorQueryHandler):
 
-    def name(self):
-        return md_name
+    def __init__(self):
+        PluginInstance.__init__(self)
+        GeneratorQueryHandler.__init__(self)
 
-    def description(self):
-        return md_description
+    def defaultTrigger(self):
+        return "vsrepo "
 
-    def initialize(self):
-        info('initialize')
-
-    def finalize(self):
-        info('finalize')
-
-
-    def handleQuery(self, query):
-        query.add(Item(
-            id="Id",
-            text="VS code Repo",
-            subtext="Pick up a Git Repo from a List and open it in VS code",
-            actions=[Action('Run script', 'Run Script', lambda: subprocess.Popen(['gnome-terminal', '--', 'sh', '-c', '/home/ibrahim/scripts/vs-code-pick-up-repo.sh | bash' ]) )]
-        ))
+    def items(self, ctx):
+        yield [
+            StandardItem(
+                id=self.id(),
+                text="VS code Repo",
+                subtext="Pick up a Git Repo from a List and open it in VS code",
+                icon_factory=lambda: Icon.grapheme("🗂️"),
+                actions=[Action(
+                    "run",
+                    "Run script",
+                    lambda: runDetachedProcess(["gnome-terminal", "--", "sh", "-c", f"{SCRIPT} | bash"]),
+                )],
+            )
+        ]
